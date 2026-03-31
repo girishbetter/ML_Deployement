@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mobile Price Predictor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>📱 Mobile Price Predictor</h1>
+
+    <form id="predictForm">
+        <input type="number" placeholder="Battery Power" id="battery_power" required>
+        <input type="number" placeholder="RAM" id="ram" required>
+        <input type="number" placeholder="Internal Memory" id="int_memory" required>
+        <input type="number" placeholder="Clock Speed" step="0.1" id="clock_speed" required>
+        <input type="number" placeholder="Mobile Weight" id="mobile_wt" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <h2 id="result"></h2>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
