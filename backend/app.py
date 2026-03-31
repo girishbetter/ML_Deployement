@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from model import predict_price
+from .model import predict_price
 
 app = Flask(__name__)
 CORS(app)
