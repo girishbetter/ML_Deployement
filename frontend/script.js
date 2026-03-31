@@ -1,6 +1,9 @@
 document.getElementById("predictForm").addEventListener("submit", async function(e) {
     e.preventDefault();
 
+    const resultBox = document.getElementById("result");
+    resultBox.innerText = "Predicting...";
+
     const data = {
         battery_power: +document.getElementById("battery_power").value,
         ram: +document.getElementById("ram").value,
@@ -10,7 +13,7 @@ document.getElementById("predictForm").addEventListener("submit", async function
     };
 
     try {
-        const response = await fetch("https://your-app-name.onrender.com/predict", {
+        const response = await fetch("https://ml-deployement-pmpa.onrender.com/predict", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -18,17 +21,15 @@ document.getElementById("predictForm").addEventListener("submit", async function
             body: JSON.stringify(data)
         });
 
-        const result = await response.json();
-
-        if (result.error) {
-            document.getElementById("result").innerText = "Error: " + result.error;
-        } else {
-            document.getElementById("result").innerText =
-                "Predicted Category: " + result.prediction;
+        if (!response.ok) {
+            throw new Error("Server error");
         }
 
+        const result = await response.json();
+
+        resultBox.innerText = "Predicted Category: " + result.prediction;
+
     } catch (error) {
-        document.getElementById("result").innerText =
-            "Server not responding (probably sleeping on Render)";
+        resultBox.innerText = "Server not responding (Render sleeping or error)";
     }
 });
